@@ -10,10 +10,11 @@ from rclpy.qos import QoSProfile
     # For sending velocity commands to the robot: Twist
     # For the sensors: Imu, LaserScan, and Odometry
 # Check the online documentation to fill in the lines below
-from ... import Twist
+from geometry_msgs.msg import Twist
 from sensor_msgs.msg import Imu
-from ... import LaserScan
-from ... import Odometry
+from sensor_msgs.msg import LaserScan
+from nav_msgs.msg import Odometry
+from rclpy.qos import QoSProfile, QoSDurabilityPolicy, QoSHistoryPolicy, QoSReliabilityPolicy, QoSLivelinessPolicy
 
 from rclpy.time import Time
 
@@ -40,7 +41,7 @@ class motion_executioner(Node):
         self.laser_initialized=False
         
         # TODO Part 3: Create a publisher to send velocity commands by setting the proper parameters in (...)
-        self.vel_publisher=self.create_publisher(...)
+        self.vel_publisher = self.create_publisher(Twist, '/cmd_vel', 10)
                 
         # loggers
         self.imu_logger=Logger('imu_content_'+str(motion_types[motion_type])+'.csv', headers=["acc_x", "acc_y", "angular_z", "stamp"])
@@ -48,20 +49,43 @@ class motion_executioner(Node):
         self.laser_logger=Logger('laser_content_'+str(motion_types[motion_type])+'.csv', headers=["ranges", "stamp"])
         
         # TODO Part 3: Create the QoS profile by setting the proper parameters in (...)
-        qos=QoSProfile(...)
+        qos_imu = QoSProfile(
+            depth=10,                   # '_depth'
+            history=QoSHistoryPolicy.KEEP_LAST,  # '_history'
+            reliability=QoSReliabilityPolicy.RELIABLE,  # '_reliability'
+            durability=QoSDurabilityPolicy.TRANSIENT_LOCAL,  # '_durability'
+#            lifespan=10,                # '_lifespan' in seconds
+#            deadline=5,                 # '_deadline' in seconds
+            liveliness=QoSLivelinessPolicy.AUTOMATIC,  # '_liveliness'
+#            liveliness_lease_duration=5  # '_liveliness_lease_duration' in seconds
+        )
+
+        qos_encoder = QoSProfile(
+            depth=10,                   # '_depth'
+            history=QoSHistoryPolicy.KEEP_LAST,  # '_history'
+            reliability=QoSReliabilityPolicy.RELIABLE,  # '_reliability'
+            durability=QoSDurabilityPolicy.TRANSIENT_LOCAL,  # '_durability'
+#            lifespan=10,                # '_lifespan' in seconds
+#            deadline=5,                 # '_deadline' in seconds
+            liveliness=QoSLivelinessPolicy.AUTOMATIC,  # '_liveliness'
+#            liveliness_lease_duration=5  # '_liveliness_lease_duration' in seconds
+        )
+
+        qos_scan = QoSProfile(
+            depth=10,                   # '_depth'
+            history=QoSHistoryPolicy.UNKNOWN,  # '_history'
+            reliability=QoSReliabilityPolicy.RELIABLE,  # '_reliability'
+            durability=QoSDurabilityPolicy.VOLATILE,  # '_durability'
+#            lifespan=10,                # '_lifespan' in seconds
+#            deadline=5,                 # '_deadline' in seconds
+            liveliness=QoSLivelinessPolicy.AUTOMATIC,  # '_liveliness'
+#            liveliness_lease_duration=5  # '_liveliness_lease_duration' in seconds
+        )
 
         # TODO Part 5: Create below the subscription to the topics corresponding to the respective sensors
-        # IMU subscription
-        
-        ...
-        
-        # ENCODER subscription
-
-        ...
-        
-        # LaserScan subscription 
-        
-        ...
+        self.imu_sub = self.create_subscription(Imu, '/imu', qos_imu)
+        self.encoder_sub = self.create_subscription(Odometry, '/odom', qos_encoder)
+        self.laserscan_sub = self.create_subscription(LaserScan, '/scan', qos_scan)
         
         self.create_timer(0.1, self.timer_callback)
 
@@ -129,15 +153,11 @@ class motion_executioner(Node):
 
 import argparse
 
-if __name__=="__main__":
+def main(args=None):
     
-
     argParser=argparse.ArgumentParser(description="input the motion type")
 
-
     argParser.add_argument("--motion", type=str, default="circle")
-
-
 
     rclpy.init()
 
@@ -155,13 +175,13 @@ if __name__=="__main__":
     else:
         print(f"we don't have {arg.motion.lower()} motion type")
 
-
-    
     try:
         rclpy.spin(ME)
     except KeyboardInterrupt:
         print("Exiting")
 
+
+# Utilities.py starts here
 
 from math import atan2, asin, sqrt
 
