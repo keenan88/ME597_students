@@ -152,14 +152,14 @@ class motion_executioner(Node):
     def make_spiral_twist(self):
         msg=Twist()
 
-        w = 6.28 / 16
+        w = 6.28 / 10
         msg.angular.z = w
 
-        r_inc = 0.1
+        r_inc = 0.5
+        r0 = 0.15
         curr_ns = self.get_clock().now().nanoseconds
-        print("curr ns:", curr_ns)
-        print("ns diff:", curr_ns - self.start_ns)
-        Vrx = w * r_inc * (curr_ns - self.start_ns) / (2 * 3.14 * 10e9) * 10
+
+        Vrx = w * w * r_inc * (curr_ns - self.start_ns) / (2 * 3.14 * 10e9) + w * r0
 
         msg.linear.x = Vrx
         ... # fill up the twist msg for spiral motion

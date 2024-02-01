@@ -1,0 +1,141 @@
+[0.000000] (-) TimerEvent: {}
+[0.002223] (movement) JobQueued: {'identifier': 'movement', 'dependencies': OrderedDict()}
+[0.002946] (movement) JobStarted: {'identifier': 'movement'}
+[0.091556] (-) TimerEvent: {}
+[0.194222] (-) TimerEvent: {}
+[0.295677] (-) TimerEvent: {}
+[0.397882] (-) TimerEvent: {}
+[0.499013] (-) TimerEvent: {}
+[0.601048] (-) TimerEvent: {}
+[0.703689] (-) TimerEvent: {}
+[0.804687] (-) TimerEvent: {}
+[0.907225] (-) TimerEvent: {}
+[1.008264] (-) TimerEvent: {}
+[1.109980] (-) TimerEvent: {}
+[1.211554] (-) TimerEvent: {}
+[1.313341] (-) TimerEvent: {}
+[1.414348] (-) TimerEvent: {}
+[1.515189] (-) TimerEvent: {}
+[1.615987] (-) TimerEvent: {}
+[1.717465] (-) TimerEvent: {}
+[1.818701] (-) TimerEvent: {}
+[1.919607] (-) TimerEvent: {}
+[2.020556] (-) TimerEvent: {}
+[2.121425] (-) TimerEvent: {}
+[2.222750] (-) TimerEvent: {}
+[2.323710] (-) TimerEvent: {}
+[2.425191] (-) TimerEvent: {}
+[2.526608] (-) TimerEvent: {}
+[2.627548] (-) TimerEvent: {}
+[2.728697] (-) TimerEvent: {}
+[2.829393] (-) TimerEvent: {}
+[2.930360] (-) TimerEvent: {}
+[3.033359] (-) TimerEvent: {}
+[3.137145] (-) TimerEvent: {}
+[3.237893] (-) TimerEvent: {}
+[3.338820] (-) TimerEvent: {}
+[3.439809] (-) TimerEvent: {}
+[3.541359] (-) TimerEvent: {}
+[3.643246] (-) TimerEvent: {}
+[3.747205] (-) TimerEvent: {}
+[3.848910] (-) TimerEvent: {}
+[3.950992] (-) TimerEvent: {}
+[4.051976] (-) TimerEvent: {}
+[4.152809] (-) TimerEvent: {}
+[4.254475] (-) TimerEvent: {}
+[4.356705] (-) TimerEvent: {}
+[4.457567] (-) TimerEvent: {}
+[4.559409] (-) TimerEvent: {}
+[4.661574] (-) TimerEvent: {}
+[4.767785] (-) TimerEvent: {}
+[4.868744] (-) TimerEvent: {}
+[4.970325] (-) TimerEvent: {}
+[5.071228] (-) TimerEvent: {}
+[5.172184] (-) TimerEvent: {}
+[5.272995] (-) TimerEvent: {}
+[5.374461] (-) TimerEvent: {}
+[5.476519] (-) TimerEvent: {}
+[5.578090] (-) TimerEvent: {}
+[5.679866] (-) TimerEvent: {}
+[5.781279] (-) TimerEvent: {}
+[5.883096] (-) TimerEvent: {}
+[5.984316] (-) TimerEvent: {}
+[6.090025] (-) TimerEvent: {}
+[6.192504] (-) TimerEvent: {}
+[6.294319] (-) TimerEvent: {}
+[6.395520] (-) TimerEvent: {}
+[6.496636] (-) TimerEvent: {}
+[6.597767] (-) TimerEvent: {}
+[6.698811] (-) TimerEvent: {}
+[6.799961] (-) TimerEvent: {}
+[6.900940] (-) TimerEvent: {}
+[7.001955] (-) TimerEvent: {}
+[7.103262] (-) TimerEvent: {}
+[7.204186] (-) TimerEvent: {}
+[7.305681] (-) TimerEvent: {}
+[7.407523] (-) TimerEvent: {}
+[7.508464] (-) TimerEvent: {}
+[7.609986] (-) TimerEvent: {}
+[7.711367] (-) TimerEvent: {}
+[7.815270] (-) TimerEvent: {}
+[7.917237] (-) TimerEvent: {}
+[8.018976] (-) TimerEvent: {}
+[8.120421] (-) TimerEvent: {}
+[8.142582] (movement) Command: {'cmd': ['/usr/bin/python3', 'setup.py', 'egg_info', '--egg-base', '../../build/movement', 'build', '--build-base', '/home/keenan/Documents/ME597_students/ros2_ws/build/movement/build', 'install', '--record', '/home/keenan/Documents/ME597_students/ros2_ws/build/movement/install.log', '--single-version-externally-managed'], 'cwd': '/home/keenan/Documents/ME597_students/ros2_ws/src/movement', 'env': {'VIRTUALENVWRAPPER_WORKON_CD': '1', 'LESSOPEN': '| /usr/bin/lesspipe %s', 'PYTHONWARNINGS': 'ignore:setup.py install is deprecated::setuptools.command.install', 'WORKON_HOME': '/home/keenan/.virtualenvs', 'USER': 'keenan', 'XDG_SESSION_TYPE': 'wayland', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib', 'HOME': '/home/keenan', 'OLDPWD': '/home/keenan/Documents/ME597_students', 'DESKTOP_SESSION': 'ubuntu', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'SYSTEMD_EXEC_PID': '2537', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', 'IM_CONFIG_PHASE': '1', 'WAYLAND_DISPLAY': 'wayland-0', 'COLCON_PREFIX_PATH': '/home/keenan/Documents/ME597_students/ros2_ws/install', 'ROS_DISTRO': 'humble', 'LOGNAME': 'keenan', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'keenan', 'TERM': 'xterm-256color', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'ROS_LOCALHOST_ONLY': '1', 'PATH': "/opt/ros/humble/bin:/home/keenan/.local/bin':/home/keenan/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin", 'SESSION_MANAGER': 'local/keenan-XPS-13-9360:@/tmp/.ICE-unix/1644,unix/keenan-XPS-13-9360:/tmp/.ICE-unix/1644', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_TERMINAL_SCREEN': '/org/gnome/Terminal/screen/64fd451d_bff6_4924_9bc4_ae037b7da1cf', 'GNOME_SETUP_DISPLAY': ':1', 'XDG_RUNTIME_DIR': '/run/user/1000', 'DISPLAY': ':0', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/.mutter-Xwaylandauth.3TE8H2', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'GNOME_TERMINAL_SERVICE': ':1.97', 'SSH_AGENT_LAUNCHER': 'gnome-keyring', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'ROS_DOMAIN_ID': '0', 'AMENT_PREFIX_PATH': '/home/keenan/Documents/ME597_students/ros2_ws/install/movement:/opt/ros/humble', 'SHELL': '/bin/bash', 'QT_ACCESSIBILITY': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'VIRTUALENVWRAPPER_PROJECT_FILENAME': '.project', 'VIRTUALENVWRAPPER_HOOK_DIR': '/home/keenan/.virtualenvs', 'VIRTUALENVWRAPPER_SCRIPT': '/usr/local/bin/virtualenvwrapper.sh', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/keenan/Documents/ME597_students/ros2_ws/build/movement', 'TURTLEBOT3_MODEL': 'burger', 'LC_ALL': 'en_US.UTF-8', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/keenan/Documents/ME597_students/ros2_ws/build/movement/prefix_override:/home/keenan/Documents/ME597_students/ros2_ws/install/movement/lib/python3.10/site-packages:/home/keenan/Documents/ME597_students/ros2_ws/install/movement/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'COLCON': '1', 'VTE_VERSION': '6800'}, 'shell': False}
+[8.220634] (-) TimerEvent: {}
+[8.321523] (-) TimerEvent: {}
+[8.422763] (-) TimerEvent: {}
+[8.524260] (-) TimerEvent: {}
+[8.625280] (-) TimerEvent: {}
+[8.726247] (-) TimerEvent: {}
+[8.827330] (-) TimerEvent: {}
+[8.928173] (-) TimerEvent: {}
+[9.029590] (-) TimerEvent: {}
+[9.130583] (-) TimerEvent: {}
+[9.232061] (-) TimerEvent: {}
+[9.334013] (-) TimerEvent: {}
+[9.435022] (-) TimerEvent: {}
+[9.535915] (-) TimerEvent: {}
+[9.636711] (-) TimerEvent: {}
+[9.738392] (-) TimerEvent: {}
+[9.839865] (-) TimerEvent: {}
+[9.941732] (-) TimerEvent: {}
+[10.043597] (-) TimerEvent: {}
+[10.146661] (-) TimerEvent: {}
+[10.259416] (-) TimerEvent: {}
+[10.360389] (-) TimerEvent: {}
+[10.384977] (movement) StdoutLine: {'line': b'running egg_info\n'}
+[10.390835] (movement) StdoutLine: {'line': b'writing ../../build/movement/movement.egg-info/PKG-INFO\n'}
+[10.393851] (movement) StdoutLine: {'line': b'writing dependency_links to ../../build/movement/movement.egg-info/dependency_links.txt\n'}
+[10.396796] (movement) StdoutLine: {'line': b'writing entry points to ../../build/movement/movement.egg-info/entry_points.txt\n'}
+[10.397738] (movement) StdoutLine: {'line': b'writing requirements to ../../build/movement/movement.egg-info/requires.txt\n'}
+[10.405562] (movement) StdoutLine: {'line': b'writing top-level names to ../../build/movement/movement.egg-info/top_level.txt\n'}
+[10.413732] (movement) StdoutLine: {'line': b"reading manifest file '../../build/movement/movement.egg-info/SOURCES.txt'\n"}
+[10.419729] (movement) StdoutLine: {'line': b"writing manifest file '../../build/movement/movement.egg-info/SOURCES.txt'\n"}
+[10.423755] (movement) StdoutLine: {'line': b'running build\n'}
+[10.424496] (movement) StdoutLine: {'line': b'running build_py\n'}
+[10.425478] (movement) StdoutLine: {'line': b'copying movement/motions.py -> /home/keenan/Documents/ME597_students/ros2_ws/build/movement/build/lib/movement\n'}
+[10.425835] (movement) StdoutLine: {'line': b'running install\n'}
+[10.426511] (movement) StdoutLine: {'line': b'running install_lib\n'}
+[10.432231] (movement) StdoutLine: {'line': b'copying /home/keenan/Documents/ME597_students/ros2_ws/build/movement/build/lib/movement/motions.py -> /home/keenan/Documents/ME597_students/ros2_ws/install/movement/lib/python3.10/site-packages/movement\n'}
+[10.435914] (movement) StdoutLine: {'line': b'byte-compiling /home/keenan/Documents/ME597_students/ros2_ws/install/movement/lib/python3.10/site-packages/movement/motions.py to motions.cpython-310.pyc\n'}
+[10.446233] (movement) StdoutLine: {'line': b'running install_data\n'}
+[10.450715] (movement) StdoutLine: {'line': b'running install_egg_info\n'}
+[10.460615] (-) TimerEvent: {}
+[10.461901] (movement) StdoutLine: {'line': b"removing '/home/keenan/Documents/ME597_students/ros2_ws/install/movement/lib/python3.10/site-packages/movement-0.0.0-py3.10.egg-info' (and everything under it)\n"}
+[10.464776] (movement) StdoutLine: {'line': b'Copying ../../build/movement/movement.egg-info to /home/keenan/Documents/ME597_students/ros2_ws/install/movement/lib/python3.10/site-packages/movement-0.0.0-py3.10.egg-info\n'}
+[10.474938] (movement) StdoutLine: {'line': b'running install_scripts\n'}
+[10.560830] (-) TimerEvent: {}
+[10.623748] (movement) StdoutLine: {'line': b'Installing motions_exe script to /home/keenan/Documents/ME597_students/ros2_ws/install/movement/lib/movement\n'}
+[10.628098] (movement) StdoutLine: {'line': b"writing list of installed files to '/home/keenan/Documents/ME597_students/ros2_ws/build/movement/install.log'\n"}
+[10.661037] (-) TimerEvent: {}
+[10.762667] (-) TimerEvent: {}
+[10.768833] (movement) CommandEnded: {'returncode': 0}
+[10.863783] (-) TimerEvent: {}
+[10.964974] (-) TimerEvent: {}
+[11.067940] (-) TimerEvent: {}
+[11.171242] (-) TimerEvent: {}
+[11.274049] (-) TimerEvent: {}
+[11.375244] (-) TimerEvent: {}
+[11.418307] (movement) JobEnded: {'identifier': 'movement', 'rc': 0}
+[11.423385] (-) EventReactorShutdown: {}
