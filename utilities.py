@@ -1,6 +1,6 @@
 from math import atan2, asin, sqrt
 
-M_PI=3.1415926535
+M_PI = 3.1415926535
 
 class Logger:
     def __init__(self, filename, headers=["e", "e_dot", "e_int", "stamp"]):
