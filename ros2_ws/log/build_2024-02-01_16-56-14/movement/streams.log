@@ -1,0 +1,24 @@
+[2.387s] Invoking command in '/home/keenan/Documents/ME597_students/ros2_ws/src/movement': PYTHONPATH=/home/keenan/Documents/ME597_students/ros2_ws/build/movement/prefix_override:/home/keenan/Documents/ME597_students/ros2_ws/install/movement/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/movement build --build-base /home/keenan/Documents/ME597_students/ros2_ws/build/movement/build install --record /home/keenan/Documents/ME597_students/ros2_ws/build/movement/install.log --single-version-externally-managed
+[3.082s] running egg_info
+[3.083s] writing ../../build/movement/movement.egg-info/PKG-INFO
+[3.084s] writing dependency_links to ../../build/movement/movement.egg-info/dependency_links.txt
+[3.084s] writing entry points to ../../build/movement/movement.egg-info/entry_points.txt
+[3.084s] writing requirements to ../../build/movement/movement.egg-info/requires.txt
+[3.085s] writing top-level names to ../../build/movement/movement.egg-info/top_level.txt
+[3.094s] reading manifest file '../../build/movement/movement.egg-info/SOURCES.txt'
+[3.097s] writing manifest file '../../build/movement/movement.egg-info/SOURCES.txt'
+[3.098s] running build
+[3.098s] running build_py
+[3.105s] copying movement/motions.py -> /home/keenan/Documents/ME597_students/ros2_ws/build/movement/build/lib/movement
+[3.106s] running install
+[3.107s] running install_lib
+[3.110s] copying /home/keenan/Documents/ME597_students/ros2_ws/build/movement/build/lib/movement/motions.py -> /home/keenan/Documents/ME597_students/ros2_ws/install/movement/lib/python3.10/site-packages/movement
+[3.112s] byte-compiling /home/keenan/Documents/ME597_students/ros2_ws/install/movement/lib/python3.10/site-packages/movement/motions.py to motions.cpython-310.pyc
+[3.118s] running install_data
+[3.119s] running install_egg_info
+[3.124s] removing '/home/keenan/Documents/ME597_students/ros2_ws/install/movement/lib/python3.10/site-packages/movement-0.0.0-py3.10.egg-info' (and everything under it)
+[3.125s] Copying ../../build/movement/movement.egg-info to /home/keenan/Documents/ME597_students/ros2_ws/install/movement/lib/python3.10/site-packages/movement-0.0.0-py3.10.egg-info
+[3.127s] running install_scripts
+[3.172s] Installing motions_exe script to /home/keenan/Documents/ME597_students/ros2_ws/install/movement/lib/movement
+[3.173s] writing list of installed files to '/home/keenan/Documents/ME597_students/ros2_ws/build/movement/install.log'
+[3.225s] Invoked command in '/home/keenan/Documents/ME597_students/ros2_ws/src/movement' returned '0': PYTHONPATH=/home/keenan/Documents/ME597_students/ros2_ws/build/movement/prefix_override:/home/keenan/Documents/ME597_students/ros2_ws/install/movement/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/movement build --build-base /home/keenan/Documents/ME597_students/ros2_ws/build/movement/build install --record /home/keenan/Documents/ME597_students/ros2_ws/build/movement/install.log --single-version-externally-managed

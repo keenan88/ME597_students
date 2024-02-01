@@ -27,11 +27,11 @@ motion_types=['circle', 'spiral', 'line']
 
 class motion_executioner(Node):
     
-    def __init__(self, motion_type=0):
+    def __init__(self, motion_type = 0):
         
         super().__init__("motion_types")
         
-        self.type=motion_type
+        self.type = motion_type
         
         self.radius_=0.0
         
@@ -83,11 +83,19 @@ class motion_executioner(Node):
         )
 
         # TODO Part 5: Create below the subscription to the topics corresponding to the respective sensors
-        self.imu_sub = self.create_subscription(Imu, '/imu', qos_imu)
-        self.encoder_sub = self.create_subscription(Odometry, '/odom', qos_encoder)
-        self.laserscan_sub = self.create_subscription(LaserScan, '/scan', qos_scan)
+        self.imu_sub = self.create_subscription(Imu, '/imu', self.imu_callback, 10)
+        self.encoder_sub = self.create_subscription(Odometry, '/odom', self.odom_callback, 10)
+        self.laserscan_sub = self.create_subscription(LaserScan, '/scan', self.laser_callback,  10)
+
+        self.odom_initialized = True
+        self.imu_initialized = True
+        self.laser_initialized = True
+
+        self.start_ns = self.get_clock().now().nanoseconds
+        print("Star ns: ", self.start_ns)
         
         self.create_timer(0.1, self.timer_callback)
+        
 
 
     # TODO Part 5: Callback functions: complete the callback functions of the three sensors to log the proper data.
@@ -115,7 +123,7 @@ class motion_executioner(Node):
         if not self.successful_init:
             return
         
-        cmd_vel_msg=Twist()
+        cmd_vel_msg = Twist()
         
         if self.type==CIRCLE:
             cmd_vel_msg=self.make_circular_twist()
@@ -138,11 +146,22 @@ class motion_executioner(Node):
     def make_circular_twist(self):
         
         msg=Twist()
-        ... # fill up the twist msg for circular motion
+        msg.angular.z = 6.28/8
         return msg
 
     def make_spiral_twist(self):
         msg=Twist()
+
+        w = 6.28 / 16
+        msg.angular.z = w
+
+        r_inc = 0.1
+        curr_ns = self.get_clock().now().nanoseconds
+        print("curr ns:", curr_ns)
+        print("ns diff:", curr_ns - self.start_ns)
+        Vrx = w * r_inc * (curr_ns - self.start_ns) / (2 * 3.14 * 10e9) * 10
+
+        msg.linear.x = Vrx
         ... # fill up the twist msg for spiral motion
         return msg
     
@@ -157,7 +176,7 @@ def main(args=None):
     
     argParser=argparse.ArgumentParser(description="input the motion type")
 
-    argParser.add_argument("--motion", type=str, default="circle")
+    argParser.add_argument("--motion", type=str, default="spiral")
 
     rclpy.init()
 
