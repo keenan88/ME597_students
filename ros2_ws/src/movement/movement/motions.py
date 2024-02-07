@@ -105,11 +105,12 @@ class motion_executioner(Node):
     # You can save the needed fields into a list, and pass the list to the log_values function in utilities.py
 
     def imu_callback(self, imu_msg: Imu):
-        ...    # log imu msgs
+        imu_data_to_log = [imu_msg.linear_acceleration.x, imu_msg.linear_acceleration.y, imu_msg.angular_velocity.z, imu_msg.header.stamp]
+        self.imu_logger.log_values(imu_data_to_log)
         
     def odom_callback(self, odom_msg: Odometry):
-        
-        ... # log odom msgs
+        odom_data_to_log = [odom_msg.pose.pose.position.x, odom_msg.pose.pose.position.y, odom_msg.pose.pose.orientation.z, odom_msg.header.stamp]
+        self.odom_logger.log_values(odom_data_to_log)
                 
     def laser_callback(self, laser_msg: LaserScan):
         
@@ -162,12 +163,11 @@ class motion_executioner(Node):
         Vrx = w * w * r_inc * (curr_ns - self.start_ns) / (2 * 3.14 * 10e9) + w * r0
 
         msg.linear.x = Vrx
-        ... # fill up the twist msg for spiral motion
         return msg
     
     def make_acc_line_twist(self):
         msg=Twist()
-        ... # fill up the twist msg for line motion
+        msg.linear.x = 1.0
         return msg
 
 import argparse
@@ -176,7 +176,7 @@ def main(args=None):
     
     argParser=argparse.ArgumentParser(description="input the motion type")
 
-    argParser.add_argument("--motion", type=str, default="spiral")
+    argParser.add_argument("--motion", type=str, default="line")
 
     rclpy.init()
 
@@ -208,7 +208,7 @@ M_PI = 3.1415926535
 
 class Logger:
     def __init__(self, filename, headers=["e", "e_dot", "e_int", "stamp"]):
-        self.filename = filename
+        self.filename = "/home/keenan/Documents/ME597_students/ros2_ws/lab1_data/" + filename
 
         with open(self.filename, 'w') as file:
             header_str=""
@@ -227,8 +227,9 @@ class Logger:
         with open(self.filename, 'a') as file:
             vals_str=""
 
-            # TODO Part 5: Write the values from the list to the file
-            ...
+            for value in values_list:
+                vals_str += str(value)
+                vals_str += ","
             
             vals_str+="\n"
             
@@ -237,6 +238,7 @@ class Logger:
 
     def save_log(self):
         pass
+
 
 class FileReader:
     def __init__(self, filename):
