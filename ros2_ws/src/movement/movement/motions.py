@@ -44,9 +44,9 @@ class motion_executioner(Node):
         self.vel_publisher = self.create_publisher(Twist, '/cmd_vel', 10)
                 
         # loggers
-        self.imu_logger=Logger('imu_content_'+str(motion_types[motion_type])+'.csv', headers=["acc_x", "acc_y", "angular_z", "sec", "nanosec"])
-        self.odom_logger=Logger('odom_content_'+str(motion_types[motion_type])+'.csv', headers=["x","y","th", "sec", "nanosec"])
-        self.laser_logger=Logger('laser_content_'+str(motion_types[motion_type])+'.csv', headers=["ranges", "sec", "nanosec"])
+        self.imu_logger=Logger('imu_content_'+str(motion_types[motion_type])+'.csv', headers=["sec", "nanosec", "acc_x", "acc_y", "angular_z"])
+        self.odom_logger=Logger('odom_content_'+str(motion_types[motion_type])+'.csv', headers=["sec", "nanosec", "x","y","th"])
+        self.laser_logger=Logger('laser_content_'+str(motion_types[motion_type])+'.csv', headers=["sec", "nanosec", "ranges"])
         
         # TODO Part 3: Create the QoS profile by setting the proper parameters in (...)
         qos_imu = QoSProfile(
@@ -104,15 +104,15 @@ class motion_executioner(Node):
     # You can save the needed fields into a list, and pass the list to the log_values function in utilities.py
 
     def imu_callback(self, imu_msg: Imu):
-        imu_data_to_log = [imu_msg.linear_acceleration.x, imu_msg.linear_acceleration.y, imu_msg.angular_velocity.z, imu_msg.header.stamp.sec, imu_msg.header.stamp.nanosec]
+        imu_data_to_log = [imu_msg.header.stamp.sec, imu_msg.header.stamp.nanosec, imu_msg.linear_acceleration.x, imu_msg.linear_acceleration.y, imu_msg.angular_velocity.z]
         self.imu_logger.log_values(imu_data_to_log)
         
     def odom_callback(self, odom_msg: Odometry):
-        odom_data_to_log = [odom_msg.pose.pose.position.x, odom_msg.pose.pose.position.y, odom_msg.pose.pose.orientation.z, odom_msg.header.stamp.sec, odom_msg.header.stamp.nanosec]
+        odom_data_to_log = [odom_msg.header.stamp.sec, odom_msg.header.stamp.nanosec, odom_msg.pose.pose.position.x, odom_msg.pose.pose.position.y, odom_msg.pose.pose.orientation.z]
         self.odom_logger.log_values(odom_data_to_log)
                 
     def laser_callback(self, laser_msg: LaserScan):
-        laser_data_to_log = list(laser_msg.ranges) + [laser_msg.header.stamp.sec, laser_msg.header.stamp.nanosec]
+        laser_data_to_log = [laser_msg.header.stamp.sec, laser_msg.header.stamp.nanosec] + list(laser_msg.ranges)
 
         self.laser_logger.log_values(laser_data_to_log)
                 
@@ -185,7 +185,7 @@ class motion_executioner(Node):
         msg.linear.x = 0.0
 
         te = (self.get_clock().now().nanoseconds - self.start_ns ) / 10e8
-        print("Time elapsed: ", te)
+        #print("Time elapsed: ", te)
 
         if te < 5 :
             msg.linear.x = 0.25
@@ -230,7 +230,7 @@ M_PI = 3.1415926535
 
 class Logger:
     def __init__(self, filename, headers=["e", "e_dot", "e_int", "stamp"]):
-        self.filename = "/home/keenan/Documents/ME597_students/ros2_ws/lab1_data/" + filename
+        self.filename = "/home/keenan/Documents/ME597_students/lab1_data/" + filename
 
         with open(self.filename, 'w') as file:
             header_str=""
@@ -238,6 +238,8 @@ class Logger:
             for header in headers:
                 header_str+=header
                 header_str+=", "
+
+            header_str = header_str[0:-2]
             
             header_str+="\n"
             
@@ -253,6 +255,8 @@ class Logger:
                 vals_str += str(value)
                 vals_str += ","
             
+            vals_str = vals_str[0:-2]
+
             vals_str+="\n"
             
             file.write(vals_str)
@@ -262,58 +266,6 @@ class Logger:
         pass
 
 
-class FileReader:
-    def __init__(self, filename):
-        
-        self.filename = filename
-        
-        
-    def read_file(self):
-        
-        read_headers=False
 
-        table=[]
-        headers=[]
-        with open(self.filename, 'r') as file:
-            # Skip the header line
-
-            if not read_headers:
-                for line in file:
-                    values=line.strip().split(',')
-
-                    for val in values:
-                        if val=='':
-                            break
-                        headers.append(val.strip())
-
-                    read_headers=True
-                    break
-            
-            next(file)
-            
-            # Read each line and extract values
-            for line in file:
-                values = line.strip().split(',')
-                
-                row=[]                
-                
-                for val in values:
-                    if val=='':
-                        break
-                    row.append(float(val.strip()))
-
-                table.append(row)
-        
-        return headers, table
-
-
-# TODO Part 5: Implement the conversion from Quaternion to Euler Angles
-def euler_from_quaternion(quat):
-    """
-    Convert quaternion (w in last place) to euler roll, pitch, yaw.
-    quat = [x, y, z, w]
-    """
-    ... # just unpack yaw
-    return yaw
 
 
