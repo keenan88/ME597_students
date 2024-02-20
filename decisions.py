@@ -29,7 +29,7 @@ class decision_maker(Node):
         super().__init__("decision_maker")
 
         #TODO Part 4: Create a publisher for the topic responsible for robot's motion
-        self.publisher=... 
+        self.publisher = self.create_publisher(Twist, '/cmd_vel', 10)
 
         publishing_period=1/rate
         
@@ -89,8 +89,12 @@ class decision_maker(Node):
         
         velocity, yaw_rate = self.controller.vel_request(self.localizer.getPose(), self.goal, True)
 
+        
         #TODO Part 4: Publish the velocity to move the robot
-        ... 
+        vel_msg2 = Twist()
+        vel_msg2.linear.x = velocity
+        vel_msg2.angular.z = yaw_rate
+        self.publisher.publish(vel_msg2)
 
 import argparse
 
