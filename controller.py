@@ -14,7 +14,7 @@ class controller:
     
     
     # Default gains of the controller for linear and angular motions
-    def __init__(self, klp=0.2, klv=0.2, kli=0.2, kap=0.2, kav=0.2, kai=0.2):
+    def __init__(self, klp=0.2, klv=0.2, kli=0.2, kap=1, kav=0.05, kai=0.2):
         
         # TODO Part 5 and 6: Modify the below lines to test your PD, PI, and PID controller
         self.PID_linear=PID_ctrl(PID, klp, klv, kli, filename_="linear.csv")
@@ -25,6 +25,8 @@ class controller:
         
         e_lin = calculate_linear_error(pose, goal)
         e_ang = calculate_angular_error(pose, goal)
+
+        #print("e ang:", e_ang)
 
         linear_vel = self.PID_linear.update([e_lin, pose[3]], status)
         angular_vel = self.PID_angular.update([e_ang, pose[3]], status)
@@ -37,6 +39,9 @@ class controller:
         linear_vel = -vel_lim if linear_vel < -vel_lim else linear_vel
         angular_vel = ang_vel_lim if angular_vel > ang_vel_lim else angular_vel
         angular_vel = -ang_vel_lim if angular_vel < -ang_vel_lim else angular_vel
+
+        if e_ang > 0.1: #We want to complete the turn before moving straight, to avoid horizontal offset from the goal
+            linear_vel = 0.0
         
         return linear_vel, angular_vel
     

@@ -21,6 +21,7 @@ from controller import controller, trajectoryController
 # You may add any other imports you may need/want to use below
 # import ...
 import rclpy
+from math import atan2, sqrt
 
 class decision_maker(Node):
     
@@ -71,6 +72,7 @@ class decision_maker(Node):
 
         curr_pos = self.localizer.getPose()
         print(curr_pos)
+        print(self.goal)
 
         if curr_pos is None:
             print("waiting for odom msgs ....")
@@ -83,7 +85,11 @@ class decision_maker(Node):
         if type(self.goal) == list:
             reached_goal = (self.goal == curr_pos)
         else: 
-            reached_goal = False
+            x_err = self.goal[0] - curr_pos[0]
+            y_err = self.goal[1] - curr_pos[1]
+            euc_err = sqrt(x_err * x_err + y_err * y_err)
+
+            reached_goal = euc_err < 0.02
 
         if reached_goal:
             print("reached goal")
@@ -97,13 +103,14 @@ class decision_maker(Node):
             
         
         velocity, yaw_rate = self.controller.vel_request(curr_pos, self.goal, True)
-        print("speeds (linx, angz): ", velocity, yaw_rate)
+        #print(velocity, yaw_rate)
 
         
         #TODO Part 4: Publish the velocity to move the robot
         vel_msg.linear.x = velocity
         vel_msg.angular.z = yaw_rate
         self.publisher.publish(vel_msg)
+        print()
 
 import argparse
 
@@ -116,13 +123,14 @@ def main(args=None):
     # Remember to define your QoS profile based on the information available in "ros2 topic info /odom --verbose" as explained in Tutorial 3
     
     odom_qos=QoSProfile(reliability=2, durability=2, history=1, depth=10)
-    
+
 
     # TODO Part 3: instantiate the decision_maker with the proper parameters for moving the robot
     if args.motion.lower() == "point":
-        DM=decision_maker(Twist, '/cmd_vel', 10, [0, -2.0, 0])
+        DM = decision_maker(Twist, '/cmd_vel', 10, [1, 0.5, atan2(0.5, 1)])
     elif args.motion.lower() == "trajectory":
-        DM=decision_maker(...)
+        DM = decision_maker(Twist, '/cmd_vel', 10, None, 10, TRAJECTORY_PLANNER)
+        
     else:
         print("invalid motion type", file=sys.stderr)        
     

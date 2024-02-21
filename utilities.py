@@ -99,10 +99,12 @@ def euler_from_quaternion(quat):
         quat.z,
         quat.w
     ]
-    _, _, yaw = efq(quat_as_array)
+    roll, pitch, yaw = efq(quat_as_array)
+
+    #print(roll, pitch, yaw)
 
     # just unpack yaw
-    return yaw
+    return roll # Unexpected that roll would be yaw, might be some frame issue
 
 
 #TODO Part 4: Implement the calculation of the linear error
@@ -128,7 +130,8 @@ def calculate_angular_error(current_pose, goal_pose):
 
     error_angular = goal_pose[2] - current_pose[2]
 
+
     # Remember to handle the cases where the angular error might exceed the range [-π, π]
-    error_angular %= pi
+    #error_angular %= pi
          
     return error_angular
