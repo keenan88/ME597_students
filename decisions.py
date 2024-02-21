@@ -56,6 +56,8 @@ class decision_maker(Node):
         # Instantiate the planner
         # NOTE: goalPoint is used only for the pointPlanner
         self.goal = self.planner.plan(goalPoint)
+        print("self.goal: ", self.goal)
+        print(type(self.goal))
 
         self.create_timer(publishing_period, self.timerCallback)
 
@@ -67,17 +69,21 @@ class decision_maker(Node):
         
         spin_once(self.localizer)
 
-        if self.localizer.getPose()  is  None:
+        curr_pos = self.localizer.getPose()
+        print(curr_pos)
+
+        if curr_pos is None:
             print("waiting for odom msgs ....")
             return
         
-        vel_msg=Twist()
+        vel_msg = Twist()
         reached_goal = False
+        
         # TODO Part 3: Check if you reached the goal
         if type(self.goal) == list:
-            reached_goal = (self.goal == self.localizer.getPose())
+            reached_goal = (self.goal == curr_pos)
         else: 
-            reached_goal=False
+            reached_goal = False
 
         if reached_goal:
             print("reached goal")
@@ -90,8 +96,8 @@ class decision_maker(Node):
             self.localizer.destroy_node()
             
         
-        velocity, yaw_rate = self.controller.vel_request(self.localizer.getPose(), self.goal, True)
-        print(velocity, yaw_rate)
+        velocity, yaw_rate = self.controller.vel_request(curr_pos, self.goal, True)
+        print("speeds (linx, angz): ", velocity, yaw_rate)
 
         
         #TODO Part 4: Publish the velocity to move the robot
@@ -114,7 +120,7 @@ def main(args=None):
 
     # TODO Part 3: instantiate the decision_maker with the proper parameters for moving the robot
     if args.motion.lower() == "point":
-        DM=decision_maker(Twist, '/cmd_vel', 10, [0.0, 0.0, 0.0])
+        DM=decision_maker(Twist, '/cmd_vel', 10, [0, -2.0, 0])
     elif args.motion.lower() == "trajectory":
         DM=decision_maker(...)
     else:

@@ -98,14 +98,13 @@ class PID_ctrl:
         
         # TODO Part 5: Implement the control law corresponding to each type of controller
         elif self.type == PD:
-            #gain = self.kp * latest_error + error_dot * self.kd
-            pass
-            # return ... # complete
+            gain = self.kp * latest_error - error_dot * self.kv            
+            return gain
         
         elif self.type == PI:
-            pass
-            # return ... # complete
+            gain = self.kp * latest_error + error_int * self.ki
+            return gain
         
         elif self.type == PID:
-            pass
-            # return ... # complete
+            gain = self.kp * latest_error - error_dot * self.kv + error_int * self.ki
+            return gain
