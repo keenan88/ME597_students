@@ -35,10 +35,13 @@ class localization(Node):
     
     def odom_callback(self, pose_msg):
         
+        
         yaw = euler_from_quaternion(pose_msg.pose.pose.orientation)
 
         # TODO Part 3: Read x,y, theta, and record the stamp
         self.pose=[ pose_msg.pose.pose.position.x, pose_msg.pose.pose.position.y, yaw, pose_msg.header.stamp]
+        print("OC: ", self.pose)
+        #print("pose: ", self.pose)
         
         # Log the data
         self.loc_logger.log_values([self.pose[0], self.pose[1], self.pose[2], Time.from_msg(self.pose[3]).nanoseconds])
