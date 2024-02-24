@@ -54,16 +54,18 @@ class trajectoryController(controller):
         self.lookAhead=lookAhead
     
     def vel_request(self, pose, listGoals, status):
-        
+
         goal = self.lookFarFor(pose, listGoals)
+
+        print("Goal: ", goal)
         
         finalGoal = listGoals[-1]
         
         e_lin = calculate_linear_error(pose, finalGoal)
         e_ang = calculate_angular_error(pose, goal)
 
-        linear_vel=self.PID_linear.update([e_lin, pose[3]], status)
-        angular_vel=self.PID_angular.update([e_ang, pose[3]], status) 
+        linear_vel = self.PID_linear.update([e_lin, pose[3]], status)
+        angular_vel = self.PID_angular.update([e_ang, pose[3]], status) 
 
         # TODO Part 4: Add saturation limits for the robot linear and angular velocity
 
@@ -79,10 +81,11 @@ class trajectoryController(controller):
     def lookFarFor(self, pose, listGoals):
         
         poseArray=np.array([pose[0], pose[1]]) 
-        listGoalsArray=np.array(listGoals)
 
-        distanceSquared=np.sum((listGoalsArray-poseArray)**2,
-                               axis=1)
-        closestIndex=np.argmin(distanceSquared)
+        listGoalsArray=np.array(listGoals)[:, 0:2]
+
+        distanceSquared = np.sum((listGoalsArray - poseArray)**2, axis=1)
+
+        closestIndex = np.argmin(distanceSquared)
 
         return listGoals[ min(closestIndex + 3, len(listGoals) - 1) ]

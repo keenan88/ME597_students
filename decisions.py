@@ -32,7 +32,7 @@ class decision_maker(Node):
         #TODO Part 4: Create a publisher for the topic responsible for robot's motion
         self.publisher = self.create_publisher(publisher_msg, publishing_topic, qos_publisher)
 
-        publishing_period=1/rate
+        publishing_period = 1 / rate
         
         # Instantiate the controller
         # TODO Part 5: Tune your parameters here
@@ -43,8 +43,8 @@ class decision_maker(Node):
     
     
         elif motion_type==TRAJECTORY_PLANNER:
-            self.controller=trajectoryController(klp=0.2, klv=0.5, kap=0.8, kav=0.6)
-            self.planner=planner(TRAJECTORY_PLANNER)
+            self.controller = trajectoryController(klp = 0.2, klv = 0.5, kap = 0.8, kav = 0.6)
+            self.planner = planner(TRAJECTORY_PLANNER)
 
         else:
             print("Error! you don't have this planner", file=sys.stderr)
@@ -57,8 +57,8 @@ class decision_maker(Node):
         # Instantiate the planner
         # NOTE: goalPoint is used only for the pointPlanner
         self.goal = self.planner.plan(goalPoint)
+        self.trajectory_idx = 0
         print("self.goal: ", self.goal)
-        print(type(self.goal))
 
         self.create_timer(publishing_period, self.timerCallback)
 
@@ -71,25 +71,30 @@ class decision_maker(Node):
         spin_once(self.localizer)
 
         curr_pos = self.localizer.getPose()
-        print(curr_pos)
-        print(self.goal)
+        print("Curr_pos: ", curr_pos)
+        #print(curr_pos)
+        #print("   ", self.goal)
 
         if curr_pos is None:
             print("waiting for odom msgs ....")
             return
         
-        vel_msg = Twist()
-        reached_goal = False
-        
         # TODO Part 3: Check if you reached the goal
-        if type(self.goal) == list:
-            reached_goal = (self.goal == curr_pos)
-        else: 
-            x_err = self.goal[0] - curr_pos[0]
-            y_err = self.goal[1] - curr_pos[1]
-            euc_err = sqrt(x_err * x_err + y_err * y_err)
+        if type(self.goal) == list: # Trajectory planner
+            point = self.goal[-1]
 
-            reached_goal = euc_err < 0.02
+        else: # Point planner
+            point = self.goal
+
+        x_err = point[0] - curr_pos[0]
+        y_err = point[1] - curr_pos[1]
+        euc_err = sqrt(x_err * x_err + y_err * y_err)
+
+        reached_goal = euc_err < 0.02
+
+        print("euc_err: ", euc_err)
+
+        vel_msg = Twist()
 
         if reached_goal:
             print("reached goal")
@@ -97,9 +102,13 @@ class decision_maker(Node):
             
             self.controller.PID_angular.logger.save_log()
             self.controller.PID_linear.logger.save_log()
+
+            self.trajectory_idx += 1
             
             #TODO Part 3: exit the spin
             self.localizer.destroy_node()
+
+            
             
         
         velocity, yaw_rate = self.controller.vel_request(curr_pos, self.goal, True)
@@ -145,7 +154,7 @@ def main(args=None):
 if __name__=="__main__":
 
     argParser=argparse.ArgumentParser(description="point or trajectory") 
-    argParser.add_argument("--motion", type=str, default="point")
+    argParser.add_argument("--motion", type=str, default="trajectory")
     args = argParser.parse_args()
 
     main(args)
