@@ -2,7 +2,7 @@
 POINT_PLANNER=0; TRAJECTORY_PLANNER=1
 
 import numpy as np
-from math import atan2
+from math import atan2, exp
 
 class planner:
     def __init__(self, type_):
@@ -27,18 +27,20 @@ class planner:
 
     # TODO Part 6: Implement the trajectories here
     def trajectory_planner(self):
-        x = np.linspace(0, 1, 10)
-        y = (x + 1) * (x + 1)
-        y = -x * x
+        x = np.linspace(0, 2, 25)
+        
 
         trajectory_points = []
 
         for i in range(len(x)):
 
+            #y = -x[i]*x[i]
 
-            theta = round(atan2(y[i], x[i]), 1)
+            y = 1 / (1 + exp(1.5 * x[i]))
 
-            trajectory_points.append([round(x[i], 2), round(y[i], 2), theta])
+            theta = round(atan2(y, x[i]), 1)
+
+            trajectory_points.append([round(x[i], 2), round(y, 2), theta])
 
         # the return should be a list of trajectory points: [ [x1,y1], ..., [xn,yn]]
         return trajectory_points
