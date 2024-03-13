@@ -36,7 +36,7 @@ class planner:
 
             #y = -x[i]*x[i]
 
-            y = 1 / (1 + exp(1.5 * x[i]))
+            y = 1 / (1 + exp(1.5 * x[i])) - 0.5
 
             theta = round(atan2(y, x[i]), 1)
 
